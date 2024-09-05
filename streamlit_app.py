@@ -196,13 +196,8 @@ def main():
     
     # Função para exibir a logo
     mostrar_logo()
-    # Redimensiona a logo (ajuste o tamanho conforme necessário)
-    logo.thumbnail((100, 100), Image.Resampling.LANCZOS)
-    # Exibe a logo alinhada à esquerda com fundo transparente
-    st.markdown(
-        f'<div style="display: flex; align-items: center;"><img src="data:image/png;base64,{base64.b64encode(logo.tobytes()).decode()}" style="width: 100px; height: auto;"></div>',
-        unsafe_allow_html=True,
-    )
+
+  
     
     st.title("Efetividade Tecnologia - Energia Solar")
     st.write("### Soluções completas em Energia Solar Fotovoltaica e TI.")
