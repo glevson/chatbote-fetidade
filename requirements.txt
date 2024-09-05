@@ -1,2 +1,6 @@
 streamlit
-openai
+pandas
+matplotlib
+numpy
+scipy
+streamlit_chat
