@@ -185,9 +185,12 @@ def form_slides():
         # Gera o link para download do PDF
         pdf_link = gerar_orcamento_pdf(st.session_state.nome, st.session_state.telefone, st.session_state.kit_selecionado, valor_kit, retorno_investimento)
         st.markdown(pdf_link, unsafe_allow_html=True)
-
+        
 # Função para exibir a logo
 
+def mostrar_logo():
+    st.image("logo-efetividade.png", width=100)  # Substitua "logo.png" pelo caminho da sua log
+    
 # Exibe a logo no centro com fundo transparente
 st.markdown(
     """
@@ -207,9 +210,8 @@ st.markdown(
     </div>
     """,
     unsafe_allow_html=True,
-)
-def mostrar_logo():
-    st.image("logo-efetividade.png", width=100)  # Substitua "logo.png" pelo caminho da sua log
+)    
+    
     
     
   
