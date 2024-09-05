@@ -192,11 +192,13 @@ def mostrar_logo():
     
 # Função principal do site
 def main():
+    
+    # Função para exibir a logo
+    mostrar_logo()
+    
     st.title("Efetividade Tecnologia - Energia Solar")
     st.write("### Soluções completas em Energia Solar Fotovoltaica e TI.")
 
-    # Função para exibir a logo
-    mostrar_logo()
 
     # Exibe ícones e layout dinâmico
     display_icons()
