@@ -189,10 +189,8 @@ def form_slides():
 # Função para exibir a logo
 def mostrar_logo():
     st.image("logo-efetividade.png", width=200)  # Substitua "logo.png" pelo caminho da sua log
-
     # Redimensiona a logo (ajuste o tamanho conforme necessário)
     logo.thumbnail((100, 100), Image.Resampling.LANCZOS)
-
     # Exibe a logo alinhada à esquerda com fundo transparente
     st.markdown(
         f'<div style="display: flex; align-items: center;"><img src="data:image/png;base64,{base64.b64encode(logo.tobytes()).decode()}" style="width: 100px; height: auto;"></div>',
