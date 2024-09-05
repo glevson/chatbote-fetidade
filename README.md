@@ -1,9 +1,6 @@
-# 💬 Chatbot template
+# 💬 Chatbot Efetividade Tecnologia
 
-A simple Streamlit app that shows how to build a chatbot using OpenAI's GPT-3.5.
-
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://chatbot-template.streamlit.app/)
-
+Essa estrutura oferece uma visão clara e organizada dos serviços da Efetividade Tecnologia, focando em sua expertise em energia solar e TI, com atenção especial ao atendimento e manutenção contínua dos sistemas fotovoltaicos.
 ### How to run it on your own machine
 
 1. Install the requirements
