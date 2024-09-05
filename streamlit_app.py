@@ -188,9 +188,8 @@ def form_slides():
 
 # Função para exibir a logo
 def mostrar_logo():
-    st.image("logo-efetividade.png", width=200)  # Substitua "logo.png" pelo caminho da sua log
-    # Redimensiona a logo (ajuste o tamanho conforme necessário)
-    logo.thumbnail((100, 100), Image.Resampling.LANCZOS)
+    st.image("logo-efetividade.png", width=100)  # Substitua "logo.png" pelo caminho da sua log
+    
     
   
 # Função principal do site
