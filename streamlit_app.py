@@ -186,7 +186,10 @@ def form_slides():
         pdf_link = gerar_orcamento_pdf(st.session_state.nome, st.session_state.telefone, st.session_state.kit_selecionado, valor_kit, retorno_investimento)
         st.markdown(pdf_link, unsafe_allow_html=True)
 
-
+# Função para exibir a logo
+def mostrar_logo():
+    st.image("logo-efetividade.png", width=200)  # Substitua "logo.png" pelo caminho da sua log
+    
 # Função principal do site
 def main():
     st.title("Efetividade Tecnologia - Energia Solar")
