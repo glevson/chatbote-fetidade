@@ -191,30 +191,7 @@ def form_slides():
 def mostrar_logo():
     st.image("logo-efetividade.png", width=100)  # Substitua "logo.png" pelo caminho da sua log
     
-# Exibe a logo no centro com fundo transparente
-st.markdown(
-    """
-    <style>
-    .container {
-        display: flex;
-        justify-content: center;
-    }
-    .logo {
-        width: 100px; /* Ajuste a largura conforme necessário */
-        height: auto;
-        background: transparent; /* Define o fundo como transparente */
-    }
-    </style>
-    <div class="container">
-        <img src="logo-efetividade.png" class="logo">
-    </div>
-    """,
-    unsafe_allow_html=True,
-)    
-    
-    
-    
-  
+ 
 # Função principal do site
 def main():
     
