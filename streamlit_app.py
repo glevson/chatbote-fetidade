@@ -1,129 +1,117 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.stats import norm
 from streamlit_chat import message as st_message
 
+# Função para exibir a página inicial
+def home():
+    st.title("Bem-vindo à Efetividade Tecnologia")
+    st.image("https://via.placeholder.com/1200x300.png", use_column_width=True)
+    st.subheader("Especialistas em Energia Solar Fotovoltaica e Soluções de TI")
+    st.write("Na Efetividade Tecnologia, oferecemos soluções sustentáveis em energia solar e serviços de TI personalizados para você.")
+    st.button("Solicitar Orçamento", on_click=lambda: st.sidebar.selectbox("Menu", menu, index=5))
+    st.button("Consulta Técnica Gratuita", on_click=lambda: st.sidebar.selectbox("Menu", menu, index=5))
 
-# Função para calcular o retorno do investimento
-def calcular_retorno_investimento(preco_inicial, economia_mensal, meses):
-    retorno_investimento = [-preco_inicial + (economia_mensal * i) for i in range(meses + 1)]
-    return retorno_investimento
+# Função para exibir a página de serviços
+def nossos_servicos():
+    st.title("Nossos Serviços")
+    st.subheader("Consultoria em Energia Solar")
+    st.write("Oferecemos avaliação de viabilidade e projetos personalizados para sua instalação solar.")
+    st.subheader("Venda e Instalação de Sistemas Fotovoltaicos")
+    st.write("Fornecemos soluções completas para residências, empresas e indústrias.")
+    st.subheader("Soluções em TI")
+    st.write("Serviços especializados em tecnologia da informação, incluindo suporte e infraestrutura.")
 
+# Função para exibir a página de manutenção e monitoramento
+def manutencao_monitoramento():
+    st.title("Manutenção e Monitoramento")
+    st.subheader("Planos de Manutenção")
+    st.write("Oferecemos diversos planos de manutenção para garantir o melhor desempenho do seu sistema fotovoltaico:")
+    st.write("- Automonitoramento")
+    st.write("- Flex")
+    st.write("- Gold")
+    st.write("- Diamond")
+    st.subheader("Monitoramento Remoto")
+    st.write("Utilizamos tecnologia avançada para monitorar e garantir a eficiência dos sistemas instalados.")
 
-# Função para gerar o gráfico de retorno do investimento
-def gerar_grafico_retorno(df_kits, meses_durabilidade):
-    plt.figure(figsize=(10, 5))
-    for index, row in df_kits.iterrows():
-        preco_inicial = row['Preço à vista (R$)']
-        economia_mensal = (row['Painéis'] * row['Potência do Painel (W)'] * 5 * 30 * 0.80) / 1000  # Considerando custo de R$ 0,80/kWh
-        retorno_investimento = calcular_retorno_investimento(preco_inicial, economia_mensal, meses_durabilidade)
+# Função para exibir a página de energia por assinatura
+def energia_por_assinatura():
+    st.title("Energia por Assinatura")
+    st.subheader("Energia Solar por Consórcio/Cooperativa")
+    st.write("Participe do nosso modelo de energia por assinatura e economize sem precisar instalar um sistema individual.")
+    st.write("**Vantagens:** Economia, sustentabilidade e flexibilidade.")
+    st.button("Solicitar Adesão", on_click=lambda: st.sidebar.selectbox("Menu", menu, index=5))
 
-        plt.plot(range(meses_durabilidade + 1), retorno_investimento, label=f"Kit {row['Kit (kWh)']} kWh")
+# Função para exibir a página do blog
+def blog():
+    st.title("Blog")
+    st.write("Acompanhe as últimas novidades e dicas sobre energia solar, sustentabilidade e TI em nosso blog.")
+    st.write("**Artigos em Destaque:**")
+    st.write("- [Inovações em Energia Solar](#)")
+    st.write("- [Como Economizar Energia](#)")
+    st.write("- [Tendências do Mercado Solar](#)")
 
-        # Calculando a probabilidade de retorno positivo após 300 meses
-        media = np.mean(retorno_investimento)
-        desvio_padrao = np.std(retorno_investimento)
-        probabilidade_retorno_positivo = 1 - norm.cdf(0, loc=media, scale=desvio_padrao)
+# Função para exibir a página de contato
+def contato():
+    st.title("Contato")
+    with st.form(key='contact_form'):
+        st.subheader("Fale Conosco")
+        name = st.text_input("Nome")
+        email = st.text_input("E-mail")
+        phone = st.text_input("Telefone")
+        message = st.text_area("Mensagem")
+        submit_button = st.form_submit_button(label='Enviar')
 
-        # Adicionando a probabilidade no gráfico
-        plt.text(meses_durabilidade, retorno_investimento[-1], f"Prob. Retorno +: {probabilidade_retorno_positivo:.2%}", ha='left', va='center')
+        if submit_button:
+            st.success(f"Obrigado {name}, sua mensagem foi enviada com sucesso!")
 
-    plt.xlabel('Meses')
-    plt.ylabel('Retorno do Investimento (R$)')
-    plt.title('Retorno do Investimento dos Kits de Energia Solar')
-    plt.legend()
-    plt.grid(True)
-    return plt
+# Função para exibir a página sobre nós
+def sobre_nos():
+    st.title("Sobre Nós")
+    st.write("Fundada há 7 anos no setor de TI, a Efetividade Tecnologia expandiu suas operações para energia solar em 2019, oferecendo soluções sustentáveis e de alta qualidade.")
+    st.subheader("Missão, Visão e Valores")
+    st.write("Nosso compromisso é com a inovação, sustentabilidade e atendimento personalizado.")
+    st.subheader("Nossa Equipe")
+    st.write("Conheça os profissionais por trás das nossas soluções de energia solar e TI.")
 
+# Função para exibir o chatbot
+def chatbot():
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-# Dados dos kits de energia solar
-dados_kits = {
-    'Kit (kWh)': [400, 500, 600, 700, 800, 1000, 2000, 4000],
-    'Inversor (kW)': [3, 3, 5, 5, 5, 6, 10, 20],
-    'Painéis': [6, 7, 8, 10, 11, 14, 28, 56],
-    'Potência do Painel (W)': [555, 555, 570, 555, 555, 555, 555, 555],
-    'Preço à vista (R$)': [11500, 12600, 15000, 16600, 17800, 22000, 40000, 75000],
-    'Parcela 60x (R$)': [394.55, 422.79, 497.41, 547.15, 584.46, 715.04, 1355.93, 2541.67],
-    'Parcela 72x (R$)': [367.00, 391.79, 460.93, 507.03, 541.60, 662.60, 1256.94, 2354.17]
-}
-df_kits = pd.DataFrame(dados_kits)
+    st.subheader("Chatbot")
+    user_input = st.text_input("Pergunte sobre Energia Solar")
 
+    if user_input:
+        st.session_state.messages.append({"message": user_input, "is_user": True})
+        st.session_state.messages.append({"message": f"Para mais informações, entre em contato conosco pelo telefone (82)993022941. Podemos ajudar a solicitar um orçamento?", "is_user": False})
 
-# Função para exibir a logo
-def mostrar_logo():
-    st.image("https://github.com/glevson/chatbote-fetidade/blob/main/logo-efetividade.png", width=200)  # Substitua "logo.png" pelo caminho da sua logo
+    for message in st.session_state.messages:
+        st_message(message["message"], is_user=message["is_user"])
 
+# Função principal para configurar a página e navegação
+def main():
+    st.set_page_config(page_title="Efetividade Tecnologia - Energia Solar", layout="wide")
 
-# Configuração da página
-st.set_page_config(page_title="Efetividade Tecnologia - Energia Solar", page_icon=":sunny:")
+    # Sidebar com menu de navegação
+    menu = ["Home", "Nossos Serviços", "Manutenção e Monitoramento", "Energia por Assinatura", "Blog", "Contato", "Sobre Nós", "Chatbot"]
+    choice = st.sidebar.selectbox("Menu", menu)
 
+    # Chama a função correspondente com base na escolha do menu
+    if choice == "Home":
+        home()
+    elif choice == "Nossos Serviços":
+        nossos_servicos()
+    elif choice == "Manutenção e Monitoramento":
+        manutencao_monitoramento()
+    elif choice == "Energia por Assinatura":
+        energia_por_assinatura()
+    elif choice == "Blog":
+        blog()
+    elif choice == "Contato":
+        contato()
+    elif choice == "Sobre Nós":
+        sobre_nos()
+    elif choice == "Chatbot":
+        chatbot()
 
-# Cabeçalho
-st.title("Efetividade Tecnologia - Energia Solar e Soluções em TI")
-mostrar_logo()  # Chamando a função para exibir a logo
-st.markdown("Sua energia limpa e inteligente.")
-
-
-# Seção Home
-st.header("Gere sua própria energia e economize!")
-st.markdown(
-    "Com nossos sistemas de energia solar fotovoltaica, você reduz sua conta de luz, contribui para o meio ambiente e valoriza seu imóvel."
-)
-
-
-# Destaques de produtos/serviços (pode ser melhorado com imagens/carousel)
-st.subheader("Nossos Destaques:")
-st.markdown("- **Soluções Residenciais:** Kits de energia solar para casas de todos os tamanhos.")
-st.markdown("- **Soluções Comerciais:** Sistemas fotovoltaicos para empresas e indústrias.")
-st.markdown("- **Monitoramento Remoto:** Acompanhe a geração de energia do seu sistema em tempo real.")
-st.markdown("- **Manutenção Preventiva:** Garanta o melhor desempenho do seu sistema com nossos planos de manutenção.")
-st.markdown("- **Energia por Assinatura:** Tenha energia solar sem investimento inicial.")
-
-
-# Botões Call to Action
-col1, col2 = st.columns(2)
-with col1:
-    st.button("Solicitar Orçamento")
-with col2:
-    st.button("Consulta Técnica Gratuita")
-
-
-# Chatbot
-st.header("Converse com nosso especialista em energia solar:")
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []
-
-if 'past' not in st.session_state:
-    st.session_state['past'] = []
-
-user_input = st.text_input("Digite sua mensagem:", key='input')
-
-if user_input:
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(
-        "Olá! Sou o especialista em energia solar da Efetividade Tecnologia. "
-        "Em que posso ajudar?"
-    )
-
-if st.session_state['generated']:
-    for i in range(len(st.session_state['generated']) - 1, -1, -1):
-        st_message(st.session_state["generated"][i], key=str(i))
-        st_message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
-
-
-# ... (Restante das seções do site - Nossos Serviços, Manutenção e Monitoramento, Energia por Assinatura, Blog, Contato, Sobre Nós) ...
-
-
-# Rodapé
-st.markdown("---")
-st.markdown("**Efetividade Tecnologia**")
-st.markdown("Telefone: (82) 99302-2941 (WhatsApp)")
-st.markdown("Email: contato@efetividadetecnologia.com.br")  # Substitua pelo email da empresa
-
-
-# Gráfico de Retorno do Investimento
-meses_durabilidade = 300
-plt = gerar_grafico_retorno(df_kits, meses_durabilidade)
-st.pyplot(plt)
+if __name__ == "__main__":
+    main()
