@@ -53,7 +53,7 @@ df_kits = pd.DataFrame(dados_kits)
 
 # Função para exibir a logo
 def mostrar_logo():
-    st.image("logo.png", width=200)  # Substitua "logo.png" pelo caminho da sua logo
+    st.image("https://github.com/glevson/chatbote-fetidade/blob/main/logo-efetividade.png", width=200)  # Substitua "logo.png" pelo caminho da sua logo
 
 
 # Configuração da página
